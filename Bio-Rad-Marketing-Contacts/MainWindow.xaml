@@ -7,6 +7,36 @@
         mc:Ignorable="d"
         Title="Bio-Rad Marketing Contacts" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Customers">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                    <GroupBox Header="Add New Entry">
+                        <Button x:Name="Add_Customer" Content="Add Customer" HorizontalAlignment="Left" Margin="403,0,0,0" VerticalAlignment="Top" Background="#FF417DC1" Height="30" Width="120"/>
+                    </GroupBox>
+                    <Label x:Name="Name" Content="Name:" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" Width="100"/>
+                    <Label x:Name="Company" Content="Company:" HorizontalAlignment="Left" Margin="40,55,0,0" VerticalAlignment="Top" Width="100"/>
+                    <Label x:Name="Phone_Number" Content="Phone Number:" HorizontalAlignment="Left" Margin="40,85,0,0" VerticalAlignment="Top" Width="100"/>
+                    <Label x:Name="Address" Content="Address:" HorizontalAlignment="Left" Margin="40,115,0,0" VerticalAlignment="Top" Width="100"/>
+                    <TextBox HorizontalAlignment="Left" Margin="180,25,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
+                    <TextBox HorizontalAlignment="Left" Margin="180,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
+                    <TextBox HorizontalAlignment="Left" Margin="180,85,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
+                    <TextBox HorizontalAlignment="Left" Margin="180,115,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
+                    <Label x:Name="Notes" Content="Notes:" HorizontalAlignment="Left" Margin="40,145,0,0" VerticalAlignment="Top" Width="100"/>
+                    <TextBox HorizontalAlignment="Left" Margin="180,145,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" Height="100"/>
 
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Image Source="/bio-rad-logo.png" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="5,0,0,0"/>
+        <Label VerticalAlignment="Center" Content="Marketing Contacts" FontSize="36" FontWeight="Bold" HorizontalAlignment="Left" Margin="155,0,0,0" />
     </Grid>
 </Window>
