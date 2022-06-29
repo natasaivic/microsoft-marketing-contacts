@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bio_Rad_Marketing_Contacts"
         mc:Ignorable="d"
-        Title="Bio-Rad Marketing Contacts" Height="450" Width="800">
+        Title="Bio-Rad Marketing Contacts" Height="650" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75" />
@@ -18,21 +18,22 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <DataGrid Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                    
                     <GroupBox Header="Add New Entry">
-                        <Button x:Name="Add_Customer" Content="Add Customer" HorizontalAlignment="Left" Margin="403,0,0,0" VerticalAlignment="Top" Background="#FF417DC1" Height="30" Width="120"/>
+                        <Button x:Name="Button_Customer_Add" Content="Add Customer" HorizontalAlignment="Left" Margin="403,0,0,0" VerticalAlignment="Top" Background="#FF417DC1" Height="30" Width="120" Click="Add_Customer_Click" Cursor="Hand"/>
                     </GroupBox>
                     <Label x:Name="Name" Content="Name:" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" Width="100"/>
                     <Label x:Name="Company" Content="Company:" HorizontalAlignment="Left" Margin="40,55,0,0" VerticalAlignment="Top" Width="100"/>
                     <Label x:Name="Phone_Number" Content="Phone Number:" HorizontalAlignment="Left" Margin="40,85,0,0" VerticalAlignment="Top" Width="100"/>
                     <Label x:Name="Address" Content="Address:" HorizontalAlignment="Left" Margin="40,115,0,0" VerticalAlignment="Top" Width="100"/>
-                    <TextBox HorizontalAlignment="Left" Margin="180,25,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
-                    <TextBox HorizontalAlignment="Left" Margin="180,55,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
-                    <TextBox HorizontalAlignment="Left" Margin="180,85,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
-                    <TextBox HorizontalAlignment="Left" Margin="180,115,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150"/>
+                    <TextBox x:Name="TextBox_Customer_Name" HorizontalAlignment="Left" Margin="180,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    <TextBox x:Name="TextBox_Customer_Company" HorizontalAlignment="Left" Margin="180,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    <TextBox x:Name="TextBox_Customer_PhoneNumber" HorizontalAlignment="Left" Margin="180,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    <TextBox x:Name="TextBox_Customer_Address" HorizontalAlignment="Left" Margin="180,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
                     <Label x:Name="Notes" Content="Notes:" HorizontalAlignment="Left" Margin="40,145,0,0" VerticalAlignment="Top" Width="100"/>
-                    <TextBox HorizontalAlignment="Left" Margin="180,145,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="150" Height="100"/>
+                    <TextBox x:Name="TextBox_Customer_Notes" HorizontalAlignment="Left" Margin="180,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="100"/>
 
+                    <DataGrid x:Name="DataGrid_Customers" Grid.Row="1"></DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
