@@ -36,6 +36,28 @@
                     <DataGrid x:Name="DataGrid_Customers" Grid.Row="1"></DataGrid>
                 </Grid>
             </TabItem>
+            <TabItem Header="Vendors">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Add New Entry">
+                        <Button x:Name="Button_Vendor_Add" Content="Add Vendor" HorizontalAlignment="Left" Margin="403,0,0,0" VerticalAlignment="Top" Height="30" Width="120" Cursor="Hand" Background="#FF68C587" Click="Add_Vendor_Click"/>
+                    </GroupBox>
+                    <Label x:Name="VendorName" Content="Name:" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" Width="100"/>
+                    <TextBox x:Name="TextBox_Vendor_Name" HorizontalAlignment="Left" Margin="180,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    <Label x:Name="VendorCompany" Content="Company:" HorizontalAlignment="Left" Margin="40,55,0,0" VerticalAlignment="Top" Width="100"/>
+                    <TextBox x:Name="TextBox_Vendor_Company" HorizontalAlignment="Left" Margin="180,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    <Label x:Name="VendorAddress" Content="Address:" HorizontalAlignment="Left" Margin="40,85,0,0" VerticalAlignment="Top" Width="100"/>
+                    <TextBox x:Name="TextBox_Vendor_Address" HorizontalAlignment="Left" Margin="180,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                    <Label x:Name="VendorPhoneNumber" Content="Phone Number:" HorizontalAlignment="Left" Margin="40,115,0,0" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="TextBox_Vendor_Phone_Number" HorizontalAlignment="Left" Margin="180,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+
+                    <DataGrid x:Name="DataGrid_Vendors" Grid.Row="1"></DataGrid>
+
+                </Grid>
+            </TabItem>
         </TabControl>
         <Image Source="/bio-rad-logo.png" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="5,0,0,0"/>
         <Label VerticalAlignment="Center" Content="Marketing Contacts" FontSize="36" FontWeight="Bold" HorizontalAlignment="Left" Margin="155,0,0,0" />

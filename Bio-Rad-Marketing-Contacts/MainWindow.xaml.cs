@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
+
 
 namespace Bio_Rad_Marketing_Contacts
 {
@@ -35,6 +37,24 @@ namespace Bio_Rad_Marketing_Contacts
         }
     }
 
+    public class Vendor
+    {
+        public string Name { get; set; }
+        public string Company { get; set; }
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime CreatedOn { get; set; }
+
+        public Vendor(string name, string company, string address, string phoneNumber, DateTime createdOn)
+        {
+            Name = name;
+            Company = company;
+            Address = address;
+            PhoneNumber = phoneNumber;
+            CreatedOn = createdOn; 
+        }
+    }
+
     public class DatabaseModel
     {
         public static void SaveCustomer(string name, string company, string phone_number, string address, string notes, DateTime createdOn)
@@ -52,11 +72,28 @@ namespace Bio_Rad_Marketing_Contacts
 
             return result;
         }
+
+        public static void SaveVendor(string name, string company, string address, string phone_number, DateTime createdOn)
+        {
+            string sqlQuery = $@"INSERT INTO vendors (name, company, address, phone_number, created_on)
+                                VALUES ('{name}', '{company}', '{address}', '{phone_number}', '{DateTime.Now}')";
+            MessageBox.Show(sqlQuery);
+        }
+        public static List<Vendor> GetVendors()
+        {
+            // string sqlQuery = "SELECT name, company, address, phone_number, created_on";
+            List<Vendor> result = new List<Vendor>();
+            result.Insert(0, new Vendor("John Smith", "Microsoft", "94301 Palo Alto", "111-222-3334", DateTime.Now));
+
+            return result;
+        }
     }
+
 
     public partial class MainWindow : Window
     {
         private List<Customer> customers;
+        private List<Vendor> vendors;
 
         public MainWindow()
         {
@@ -64,6 +101,8 @@ namespace Bio_Rad_Marketing_Contacts
             
             customers = DatabaseModel.GetCustomers();
             DataGrid_Customers.ItemsSource = customers;
+            vendors = DatabaseModel.GetVendors();
+            DataGrid_Vendors.ItemsSource = vendors;
         }
 
         private void Add_Customer_Click(object sender, RoutedEventArgs e)
@@ -133,6 +172,58 @@ namespace Bio_Rad_Marketing_Contacts
             }
 
             return true;
+        }
+
+        private void Add_Vendor_Click(object sender, RoutedEventArgs e)
+        {
+            var name = TextBox_Vendor_Name.Text;
+            var company = TextBox_Vendor_Company.Text;
+            var address = TextBox_Vendor_Address.Text;
+            var phone = TextBox_Vendor_Phone_Number.Text;
+
+            // input validation
+            if (String.IsNullOrEmpty(name)) {
+                MessageBox.Show("Name cannot be empty.");
+                return;
+            }
+            if (String.IsNullOrEmpty(company))
+            {
+                MessageBox.Show("Company cannot be empty.");
+                return;
+            }
+            if (String.IsNullOrEmpty(address)) {
+                MessageBox.Show("Address cannot be empty.");
+                return;
+            }
+            if (String.IsNullOrEmpty(phone))
+            {
+                MessageBox.Show("Phone number cannot be empty.");
+                return;
+            }
+
+
+            // Save data in DB.
+            DatabaseModel.SaveVendor(name, company, address, phone, DateTime.Now);
+
+            var currentVendor = new Vendor(name, company, address, phone, DateTime.Now);
+            vendors.Insert(0, currentVendor);
+
+            // reload data grid
+            RefreshDataGrid_v();
+            ClearForm_v();
+
+            
+            }
+        private void RefreshDataGrid_v()
+        {
+            DataGrid_Vendors.ItemsSource = null;
+            DataGrid_Vendors.ItemsSource = vendors;
+        }
+        private void ClearForm_v() {
+            TextBox_Vendor_Name.Clear();
+            TextBox_Vendor_Company.Clear();
+            TextBox_Vendor_Address.Clear();
+            TextBox_Vendor_Phone_Number.Clear();
         }
     }
 }
