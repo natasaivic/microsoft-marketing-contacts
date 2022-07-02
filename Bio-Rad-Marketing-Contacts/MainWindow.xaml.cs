@@ -1,60 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Text.RegularExpressions;
-
 
 namespace Bio_Rad_Marketing_Contacts
 {
-    public class Customer
-    {
-        public string Name { get; set; }
-        public string Company { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Address { get; set; }
-        public string Note { get; set; }
-        public DateTime CreatedOn { get; set; }
-
-        public Customer(string name, string company, string phoneNumber, string address, string note, DateTime createdOn) 
-        { 
-            Name = name;
-            Company = company;
-            PhoneNumber = phoneNumber;
-            Address = address;
-            Note = note;
-            CreatedOn = createdOn;
-        }
-    }
-
-    public class Vendor
-    {
-        public string Name { get; set; }
-        public string Company { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
-        public DateTime CreatedOn { get; set; }
-
-        public Vendor(string name, string company, string address, string phoneNumber, DateTime createdOn)
-        {
-            Name = name;
-            Company = company;
-            Address = address;
-            PhoneNumber = phoneNumber;
-            CreatedOn = createdOn; 
-        }
-    }
-
     public class DatabaseModel
     {
         public static void SaveCustomer(string name, string company, string phone_number, string address, string notes, DateTime createdOn)
@@ -88,7 +38,6 @@ namespace Bio_Rad_Marketing_Contacts
             return result;
         }
     }
-
 
     public partial class MainWindow : Window
     {
@@ -125,7 +74,7 @@ namespace Bio_Rad_Marketing_Contacts
                 return;
             }
 
-            if (!isValidPhoneNumber(phone)) // validate if it's a number or not?
+            if (!isValidPhoneNumber(phone))
             {
                 MessageBox.Show("Phone number is not valid");
                 return;
@@ -145,33 +94,23 @@ namespace Bio_Rad_Marketing_Contacts
             customers.Insert(0, currenCustomer);
 
             // reload data grid
-            RefreshDataGrid();
-            ClearForm();
+            RefreshCustomerDataGrid();
+            ClearCustomerForm();
         }
 
-        private void RefreshDataGrid() {
+        private void RefreshCustomerDataGrid() {
             // load from database
             // customers = DatabaseModel.GetCustomers();
             DataGrid_Customers.ItemsSource = null;
             DataGrid_Customers.ItemsSource = customers;
         }
 
-        private void ClearForm() {
+        private void ClearCustomerForm() {
             TextBox_Customer_Name.Clear();
             TextBox_Customer_Company.Clear();
             TextBox_Customer_PhoneNumber.Clear();
             TextBox_Customer_Address.Clear();
             TextBox_Customer_Notes.Clear();
-        }
-
-        private bool isValidPhoneNumber(string phone)
-        {
-            if (String.IsNullOrEmpty(phone))
-            {
-                return false;
-            }
-
-            return true;
         }
 
         private void Add_Vendor_Click(object sender, RoutedEventArgs e)
@@ -201,6 +140,11 @@ namespace Bio_Rad_Marketing_Contacts
                 return;
             }
 
+            if (!isValidPhoneNumber(phone))
+            {
+                MessageBox.Show("Phone number is not valid");
+                return;
+            }
 
             // Save data in DB.
             DatabaseModel.SaveVendor(name, company, address, phone, DateTime.Now);
@@ -209,21 +153,38 @@ namespace Bio_Rad_Marketing_Contacts
             vendors.Insert(0, currentVendor);
 
             // reload data grid
-            RefreshDataGrid_v();
-            ClearForm_v();
+            RefreshVendorDataGrid();
+            ClearVendorForm();
+        }
 
-            
-            }
-        private void RefreshDataGrid_v()
+        private void RefreshVendorDataGrid()
         {
             DataGrid_Vendors.ItemsSource = null;
             DataGrid_Vendors.ItemsSource = vendors;
         }
-        private void ClearForm_v() {
+
+        private void ClearVendorForm() {
             TextBox_Vendor_Name.Clear();
             TextBox_Vendor_Company.Clear();
             TextBox_Vendor_Address.Clear();
             TextBox_Vendor_Phone_Number.Clear();
+        }
+
+        private bool isValidPhoneNumber(string phone)
+        {
+            if (String.IsNullOrEmpty(phone))
+            {
+                return false;
+            }
+
+            var regex = @"^[0-9]{3}(-| )?[0-9]{3}(-| )?[0-9]{4}$";
+            var result = Regex.Match(phone, regex);
+            if (!result.Success)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
