@@ -120,7 +120,7 @@ namespace Bio_Rad_Marketing_Contacts
         private void RefreshVendorDataGrid()
         {
             DataGrid_Vendors.ItemsSource = null;
-            // DataGrid_Vendors.ItemsSource = vendors;
+            DataGrid_Vendors.ItemsSource = DatabaseModel.GetVendors();
         }
 
         private void ClearVendorForm() {

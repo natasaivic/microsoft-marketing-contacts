@@ -60,16 +60,45 @@ namespace Bio_Rad_Marketing_Contacts
 
         public static void SaveVendor(string name, string company, string address, string phone_number, DateTime createdOn)
         {
-            string sqlQuery = $@"INSERT INTO vendors (name, company, address, phone_number, created_on)
-                                VALUES ('{name}', '{company}', '{address}', '{phone_number}', '{DateTime.Now}')";
-            MessageBox.Show(sqlQuery);
+            string sqlQuery = @$"INSERT INTO dbo.Vendors (Name, Company, PhoneNumber, Address, CreatedOn) 
+                              VALUES ('{name}', '{company}', '{phone_number}', '{address}', '{createdOn}')";
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
 
         public static List<Vendor> GetVendors()
         {
-            // string sqlQuery = "SELECT name, company, address, phone_number, created_on";
             List<Vendor> result = new List<Vendor>();
-            result.Insert(0, new Vendor("John Smith", "Microsoft", "94301 Palo Alto", "111-222-3334", DateTime.Now));
+
+            string sqlString = @"
+                SELECT Name, Company, PhoneNumber, Address, CreatedOn 
+                FROM Vendors
+                ORDER BY Id DESC";
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = new SqlCommand(sqlString, connection);
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var vendorName = $"{reader[0]}";
+                        var vendorCompany = $"{reader[1]}";
+                        var vendorPhoneNumber = $"{reader[2]}";
+                        var vendorAddress = $"{reader[3]}";
+                        var vendorCreatedOn = Convert.ToDateTime($"{reader[4]}");
+
+                        var vendor = new Vendor(vendorName, vendorCompany,
+                            vendorPhoneNumber, vendorAddress, vendorCreatedOn);
+
+                        result.Insert(0, vendor);
+                    }
+                }
+            }
 
             return result;
         }
