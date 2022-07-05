@@ -2,17 +2,29 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Text.RegularExpressions;
+using System.Windows.Threading;
 
 namespace Bio_Rad_Marketing_Contacts
 {
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
 
             DataGrid_Customers.ItemsSource = DatabaseModel.GetCustomers();
             DataGrid_Vendors.ItemsSource = DatabaseModel.GetVendors();
+
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(1);
+            timer.Tick += timer_Tick;
+            timer.Start();
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            lblTime.Content = DateTime.Now.ToString("HH:mm:ss");
         }
 
         private void Add_Customer_Click(object sender, RoutedEventArgs e)

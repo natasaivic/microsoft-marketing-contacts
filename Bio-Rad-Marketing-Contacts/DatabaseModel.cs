@@ -24,7 +24,7 @@ namespace Bio_Rad_Marketing_Contacts
             }
         }
 
-        public static List<Customer> GetCustomers()
+         public static List<Customer> GetCustomers()
         {
             List<Customer> result = new List<Customer>();
 
