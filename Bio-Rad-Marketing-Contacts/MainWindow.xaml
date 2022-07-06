@@ -58,9 +58,14 @@
 
                 </Grid>
             </TabItem>
+            <TabItem Header="Master List">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="DataGrid_MasterList"></DataGrid>
+                </Grid>
+            </TabItem>
         </TabControl>
         <Image Source="/bio-rad-logo.png" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="5,0,0,0"/>
         <Label VerticalAlignment="Center" Content="Marketing Contacts" FontSize="36" FontWeight="Bold" HorizontalAlignment="Left" Margin="155,0,0,0" />
-        <Label x:Name="lblTime" Content="Label" HorizontalAlignment="Left" Margin="620,17,0,0" VerticalAlignment="Top" Width="160" Height="49"/>
+        <Label x:Name="lblTime" Content="" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Width="160" Height="50" FontWeight="Bold" HorizontalContentAlignment="Right" />
     </Grid>
 </Window>

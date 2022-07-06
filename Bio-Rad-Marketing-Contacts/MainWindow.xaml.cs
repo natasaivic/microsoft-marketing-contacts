@@ -22,7 +22,7 @@ namespace Bio_Rad_Marketing_Contacts
             timer.Start();
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        void timer_Tick(object? sender, EventArgs e)
         {
             lblTime.Content = DateTime.Now.ToString("HH:mm:ss");
         }
@@ -102,6 +102,7 @@ namespace Bio_Rad_Marketing_Contacts
                 MessageBox.Show("Company cannot be empty.");
                 return;
             }
+           
             if (String.IsNullOrEmpty(address)) {
                 MessageBox.Show("Address cannot be empty.");
                 return;
@@ -111,18 +112,38 @@ namespace Bio_Rad_Marketing_Contacts
                 MessageBox.Show("Phone number cannot be empty.");
                 return;
             }
-
             if (!isValidPhoneNumber(phone))
             {
                 MessageBox.Show("Phone number is not valid");
                 return;
             }
 
+            // check master list
+            var vendorCode = DatabaseModel.findVendorCodeInMasterList(company);
+            if (vendorCode is null)
+            {
+                while (true)
+                {
+                    var vendorCodeWindow = new VendorCodeWindow();
+                    vendorCodeWindow.ShowDialog();
+
+                    if (vendorCodeWindow.Code is null) {
+                        return;
+                    }
+                    var success = DatabaseModel.addVendorCompanyToMasterList(company, vendorCodeWindow.Code);
+                    if (success)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid vendor code, please use another one");
+                    }
+                }
+            }
+
             // Save data in DB.
             DatabaseModel.SaveVendor(name, company, address, phone, DateTime.Now);
-
-            //var currentVendor = new Vendor(name, company, address, phone, DateTime.Now);
-            //vendors.Insert(0, currentVendor);
 
             // reload data grid
             RefreshVendorDataGrid();
