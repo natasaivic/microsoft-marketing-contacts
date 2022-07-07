@@ -1,6 +1,8 @@
-﻿CREATE TABLE [dbo].[MasterList]
-(
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [CompanyName] NCHAR(50) NOT NULL, 
-    [VendorCode] NCHAR(6) NOT NULL UNIQUE
-)
+﻿CREATE TABLE [dbo].[MasterList] (
+    [Id]          INT           IDENTITY (1, 1) NOT NULL,
+    [CompanyName] NVARCHAR (50) NOT NULL,
+    [VendorCode]  NVARCHAR (4)  NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    UNIQUE NONCLUSTERED ([VendorCode] ASC)
+);
+

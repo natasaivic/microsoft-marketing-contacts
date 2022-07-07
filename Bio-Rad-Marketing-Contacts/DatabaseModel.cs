@@ -43,12 +43,16 @@ namespace Bio_Rad_Marketing_Contacts
                 {
                     while (reader.Read())
                     {
-                        var customerName = $"{reader[0]}";
-                        var customerCompany = $"{reader[1]}";
-                        var customerPhoneNumber = $"{reader[2]}";
-                        var customerAddress = $"{reader[3]}";
-                        var customerNote = $"{reader[4]}";
-                        var customerCreatedOn = Convert.ToDateTime($"{reader[5]}");
+                        var customerName = reader.GetString(0);
+                        var customerCompany = reader.GetString(1);
+                        var customerPhoneNumber = reader.GetString(2);
+                        var customerAddress = reader.GetString(3);
+                        var customerNote = "";
+                        if (!reader.IsDBNull(4))
+                        {
+                            customerNote = reader.GetString(4);
+                        }
+                        var customerCreatedOn = reader.GetDateTime(5);
 
                         var customer = new Customer(customerName, customerCompany,
                             customerPhoneNumber, customerAddress, customerNote, customerCreatedOn);
