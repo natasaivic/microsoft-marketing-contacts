@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Text.RegularExpressions;
 using System.Windows.Threading;
@@ -12,20 +11,30 @@ namespace Bio_Rad_Marketing_Contacts
         public MainWindow()
         {
             InitializeComponent();
+            InitializeDataGrids();
+            InitializeClock();
+        }
 
+        private void InitializeDataGrids()
+        {
             DataGrid_Customers.ItemsSource = DatabaseModel.GetCustomers();
             DataGrid_Vendors.ItemsSource = DatabaseModel.GetVendors();
             DataGrid_MasterList.ItemsSource = DatabaseModel.GetMasterListVendors();
-
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(1);
-            timer.Tick += timer_Tick;
-            timer.Start();
         }
 
-        void timer_Tick(object? sender, EventArgs e)
+        private void InitializeClock()
         {
-            lblTime.Content = DateTime.Now.ToString("HH:mm:ss");
+            Label_Time.Content = DateTime.Now.ToString("HH:mm:ss");
+
+            DispatcherTimer clock = new DispatcherTimer();
+            clock.Interval = TimeSpan.FromSeconds(1);
+            clock.Tick += Clock_Tick;
+            clock.Start();
+        }
+
+        void Clock_Tick(object? sender, EventArgs e)
+        {
+            Label_Time.Content = DateTime.Now.ToString("HH:mm:ss");
         }
 
         private void Add_Customer_Click(object sender, RoutedEventArgs e)
@@ -122,17 +131,17 @@ namespace Bio_Rad_Marketing_Contacts
                 var vendorCodeWindow = new VendorCodeWindow();
                 vendorCodeWindow.ShowDialog();
 
-                // if we click on cancel vendorCodeWindow.Code will be null
-                if (vendorCodeWindow.Code is null) {
+                // if we click on cancel vendorCodeWindow.VendorCode will be null
+                if (vendorCodeWindow.VendorCode is null) {
                     return;
                 }
 
-                DatabaseModel.AddVendorCompanyToMasterList(company, vendorCodeWindow.Code);
+                DatabaseModel.AddVendorCompanyToMasterList(company, vendorCodeWindow.VendorCode);
                 RefreshMasterListDataGrid();
             }
 
             // Save data in DB.
-            DatabaseModel.SaveVendor(name, company, address, phone, DateTime.Now);
+            DatabaseModel.SaveVendor(name, company, address, phone);
 
             // reload data grid
             RefreshVendorDataGrid();
@@ -173,6 +182,16 @@ namespace Bio_Rad_Marketing_Contacts
             }
 
             return true;
+        }
+
+        private void Button_Clear_Customer_Entry_Click(object sender, RoutedEventArgs e)
+        {
+            ClearCustomerForm();
+        }
+
+        private void Button_Clear_Vendor_Entry_Click(object sender, RoutedEventArgs e)
+        {
+            ClearVendorForm();
         }
     }
 }

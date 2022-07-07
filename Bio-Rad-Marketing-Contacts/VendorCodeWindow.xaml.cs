@@ -16,7 +16,7 @@ namespace Bio_Rad_Marketing_Contacts
 {
     public partial class VendorCodeWindow : Window
     {
-        public string? Code { get; set; }
+        public string? VendorCode { get; set; }
 
         public VendorCodeWindow()
         {
@@ -25,30 +25,30 @@ namespace Bio_Rad_Marketing_Contacts
 
         private void Btn_Vendor_Code_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            Code = null;
+            VendorCode = null;
             Close();
         }
 
         private void Btn_Vendor_Code_Save_Click(object sender, RoutedEventArgs e)
         {
-            Code = TextBox_Vendor_Code.Text;
-            if (Code.Length != 4) {
+            VendorCode = TextBox_Vendor_Code.Text;
+            if (VendorCode.Length != 4) {
                 MessageBox.Show("Vendor code must be 4 characters long (e.g. A001)");
                 return;
             }
 
-            if (!Char.IsLetter(Code[0])) {
+            if (!Char.IsLetter(VendorCode[0])) {
                 MessageBox.Show("Vendor code must start with a letter (e.g. A001)");
                 return;
             }
 
-            if (!Char.IsNumber(Code[1]) || !Char.IsNumber(Code[2]) || !Char.IsNumber(Code[3]))
+            if (!Char.IsNumber(VendorCode[1]) || !Char.IsNumber(VendorCode[2]) || !Char.IsNumber(VendorCode[3]))
             {
                 MessageBox.Show("Vendor code must have three last characters as numbers (e.g. A001)");
                 return;
             }
 
-            if (DatabaseModel.CheckIfVenorCodeExists(Code)) {
+            if (DatabaseModel.CheckIfVenorCodeExists(VendorCode)) {
                 MessageBox.Show("Vendor code already exists in database, use unique vendor code.");
                 return;
             }

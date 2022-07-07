@@ -20,7 +20,17 @@
                     </Grid.RowDefinitions>
                     
                     <GroupBox Header="Add New Entry">
-                        <Button x:Name="Button_Customer_Add" Content="Add Customer" HorizontalAlignment="Left" Margin="403,0,0,0" VerticalAlignment="Top" Background="#FF417DC1" Height="30" Width="120" Click="Add_Customer_Click" Cursor="Hand"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="Button_Customer_Add" Grid.Row="0" Content="Add Customer" HorizontalAlignment="Left" Margin="403,0,0,0" VerticalAlignment="Top" Background="#FF417DC1" Height="30" Width="120" Click="Add_Customer_Click" Cursor="Hand"/>
+                            <Button x:Name="Button_Clear_Customer_Entry" Grid.Row="0" Content="Clear Entry" HorizontalAlignment="Left" Margin="403,60,0,0" VerticalAlignment="Top" Background="SlateGray"  Height="30" Width="120" Click="Button_Clear_Customer_Entry_Click" Cursor="Hand"/>
+                        </Grid>
                     </GroupBox>
                     <Label x:Name="Name" Content="Name:" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" Width="100"/>
                     <Label x:Name="Company" Content="Company:" HorizontalAlignment="Left" Margin="40,55,0,0" VerticalAlignment="Top" Width="100"/>
@@ -43,7 +53,17 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <GroupBox Header="Add New Entry">
-                        <Button x:Name="Button_Vendor_Add" Content="Add Vendor" HorizontalAlignment="Left" Margin="403,0,0,0" VerticalAlignment="Top" Height="30" Width="120" Cursor="Hand" Background="#FF68C587" Click="Add_Vendor_Click"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="Button_Vendor_Add" Content="Add Vendor" HorizontalAlignment="Left" Margin="403,0,0,0" VerticalAlignment="Top" Height="30" Width="120" Cursor="Hand" Background="#FF68C587" Click="Add_Vendor_Click"/>
+                            <Button x:Name="Button_Clear_Vendor_Entry" Grid.Row="0" Content="Clear Entry" HorizontalAlignment="Left" Margin="403,60,0,0" VerticalAlignment="Top" Background="SlateGray"  Height="30" Width="120" Click="Button_Clear_Vendor_Entry_Click" Cursor="Hand"/>
+                        </Grid>
                     </GroupBox>
                     <Label x:Name="VendorName" Content="Name:" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" Width="100"/>
                     <TextBox x:Name="TextBox_Vendor_Name" HorizontalAlignment="Left" Margin="180,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
@@ -66,6 +86,6 @@
         </TabControl>
         <Image Source="/bio-rad-logo.png" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="5,0,0,0"/>
         <Label VerticalAlignment="Center" Content="Marketing Contacts" FontSize="36" FontWeight="Bold" HorizontalAlignment="Left" Margin="155,0,0,0" />
-        <Label x:Name="lblTime" Content="" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Width="160" Height="50" FontWeight="Bold" HorizontalContentAlignment="Right" />
+        <Label x:Name="Label_Time" Content="" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Width="160" Height="50" FontWeight="Bold" HorizontalContentAlignment="Right" />
     </Grid>
 </Window>
