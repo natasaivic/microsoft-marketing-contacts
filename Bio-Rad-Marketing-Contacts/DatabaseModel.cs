@@ -155,5 +155,34 @@ namespace Bio_Rad_Marketing_Contacts
                 return true;
             }
         }
+
+        public static List<MasterListVendor> GetMasterListVendors()
+        {
+            List<MasterListVendor> result = new List<MasterListVendor>();
+
+            string sqlString = @"
+                SELECT CompanyName, VendorCode 
+                FROM dbo.MasterList
+                ORDER BY Id DESC";
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = new SqlCommand(sqlString, connection);
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var companyName = $"{reader[0]}";
+                        var vendorCode = $"{reader[1]}";
+
+                        var master_list_vendor = new MasterListVendor(companyName, vendorCode);
+
+                        result.Insert(0, master_list_vendor);
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }

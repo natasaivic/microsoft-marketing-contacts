@@ -15,6 +15,7 @@ namespace Bio_Rad_Marketing_Contacts
 
             DataGrid_Customers.ItemsSource = DatabaseModel.GetCustomers();
             DataGrid_Vendors.ItemsSource = DatabaseModel.GetVendors();
+            DataGrid_MasterList.ItemsSource = DatabaseModel.GetMasterListVendors();
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(1);
@@ -133,6 +134,7 @@ namespace Bio_Rad_Marketing_Contacts
                     var success = DatabaseModel.addVendorCompanyToMasterList(company, vendorCodeWindow.Code);
                     if (success)
                     {
+                        RefreshMasterListDataGrid();
                         break;
                     }
                     else
@@ -161,6 +163,12 @@ namespace Bio_Rad_Marketing_Contacts
             TextBox_Vendor_Company.Clear();
             TextBox_Vendor_Address.Clear();
             TextBox_Vendor_Phone_Number.Clear();
+        }
+
+        private void RefreshMasterListDataGrid()
+        {
+            DataGrid_MasterList.ItemsSource = null;
+            DataGrid_MasterList.ItemsSource = DatabaseModel.GetMasterListVendors();
         }
 
         private bool isValidPhoneNumber(string phone)
