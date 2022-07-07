@@ -63,10 +63,6 @@ namespace Bio_Rad_Marketing_Contacts
             // Save data in DB
             DatabaseModel.SaveCustomer(name, company, phone, address, notes, DateTime.Now);
 
-            // Since there is no DB save yet, let's add to this.customers so we can see it in the grid
-            //var currenCustomer = new Customer(name, company, phone, address, notes, DateTime.Now);
-            // customers.Insert(0, currenCustomer);
-
             // reload data grid
             RefreshCustomerDataGrid();
             ClearCustomerForm();
@@ -120,28 +116,19 @@ namespace Bio_Rad_Marketing_Contacts
             }
 
             // check master list
-            var vendorCode = DatabaseModel.findVendorCodeInMasterList(company);
+            var vendorCode = DatabaseModel.FindVendorCodeInMasterList(company);
             if (vendorCode is null)
             {
-                while (true)
-                {
-                    var vendorCodeWindow = new VendorCodeWindow();
-                    vendorCodeWindow.ShowDialog();
+                var vendorCodeWindow = new VendorCodeWindow();
+                vendorCodeWindow.ShowDialog();
 
-                    if (vendorCodeWindow.Code is null) {
-                        return;
-                    }
-                    var success = DatabaseModel.addVendorCompanyToMasterList(company, vendorCodeWindow.Code);
-                    if (success)
-                    {
-                        RefreshMasterListDataGrid();
-                        break;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid vendor code, please use another one");
-                    }
+                // if we click on cancel vendorCodeWindow.Code will be null
+                if (vendorCodeWindow.Code is null) {
+                    return;
                 }
+
+                DatabaseModel.AddVendorCompanyToMasterList(company, vendorCodeWindow.Code);
+                RefreshMasterListDataGrid();
             }
 
             // Save data in DB.

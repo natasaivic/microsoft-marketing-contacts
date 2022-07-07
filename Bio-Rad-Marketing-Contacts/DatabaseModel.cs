@@ -93,11 +93,11 @@ namespace Bio_Rad_Marketing_Contacts
                 {
                     while (reader.Read())
                     {
-                        var vendorName = $"{reader[0]}";
-                        var vendorCompany = $"{reader[1]}";
-                        var vendorPhoneNumber = $"{reader[2]}";
-                        var vendorAddress = $"{reader[3]}";
-                        var vendorCreatedOn = Convert.ToDateTime($"{reader[4]}");
+                        var vendorName = reader.GetString(0);
+                        var vendorCompany = reader.GetString(1);
+                        var vendorPhoneNumber = reader.GetString(2);
+                        var vendorAddress = reader.GetString(3);
+                        var vendorCreatedOn = reader.GetDateTime(4);
 
                         var vendor = new Vendor(vendorName, vendorCompany,
                             vendorPhoneNumber, vendorAddress, vendorCreatedOn);
@@ -110,7 +110,7 @@ namespace Bio_Rad_Marketing_Contacts
             return result;
         }
 
-        public static string? findVendorCodeInMasterList(string company) {
+        public static string? FindVendorCodeInMasterList(string company) {
             string sqlString = @"
                 SELECT VendorCode
                 FROM dbo.MasterList
@@ -137,7 +137,7 @@ namespace Bio_Rad_Marketing_Contacts
             }
         }
 
-        public static bool addVendorCompanyToMasterList(string company, string vendorCode) {
+        public static void AddVendorCompanyToMasterList(string company, string vendorCode) {
             string sqlQuery = @"
                 INSERT INTO dbo.MasterList (CompanyName, VendorCode) 
                 VALUES (@company, @vendorCode)";
@@ -149,14 +149,22 @@ namespace Bio_Rad_Marketing_Contacts
                 SqlParameter companyParam = new SqlParameter("@company", SqlDbType.NVarChar, 50);
                 companyParam.Value = company;
                 command.Parameters.Add(companyParam);
+
                 SqlParameter vendorCodeParam = new SqlParameter("@vendorCode", SqlDbType.NVarChar, 4);
                 vendorCodeParam.Value = vendorCode;
                 command.Parameters.Add(vendorCodeParam);
 
                 command.Prepare();
 
-                command.ExecuteNonQuery(); // error handling
-                return true;
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Database error while adding new Vendor. Invalid SQL.");
+                    System.Windows.Application.Current.Shutdown();
+                }
             }
         }
 
@@ -176,17 +184,38 @@ namespace Bio_Rad_Marketing_Contacts
                 {
                     while (reader.Read())
                     {
-                        var companyName = $"{reader[0]}";
-                        var vendorCode = $"{reader[1]}";
+                        var companyName = reader.GetString(0);
+                        var vendorCode = reader.GetString(1);
 
-                        var master_list_vendor = new MasterListVendor(companyName, vendorCode);
-
-                        result.Insert(0, master_list_vendor);
+                        var masterListVendor = new MasterListVendor(companyName, vendorCode);
+                        result.Insert(0, masterListVendor);
                     }
                 }
             }
 
             return result;
+        }
+
+        public static bool CheckIfVenorCodeExists(string code)
+        {
+            string sqlString = @"
+                SELECT VendorCode 
+                FROM dbo.MasterList
+                WHERE VendorCode = @code";
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = new SqlCommand(sqlString, connection);
+                connection.Open();
+                
+                SqlParameter codeParam = new SqlParameter("@code", SqlDbType.NVarChar, 4);
+                codeParam.Value = code;
+                command.Parameters.Add(codeParam);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    return reader.HasRows;
+                }
+            }
         }
     }
 }

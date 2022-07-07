@@ -33,7 +33,7 @@
                     <Label x:Name="Notes" Content="Notes:" HorizontalAlignment="Left" Margin="40,145,0,0" VerticalAlignment="Top" Width="100"/>
                     <TextBox x:Name="TextBox_Customer_Notes" HorizontalAlignment="Left" Margin="180,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="100"/>
 
-                    <DataGrid x:Name="DataGrid_Customers" Grid.Row="1"></DataGrid>
+                    <DataGrid x:Name="DataGrid_Customers" Grid.Row="1" VerticalScrollBarVisibility="Disabled"></DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="Vendors">
