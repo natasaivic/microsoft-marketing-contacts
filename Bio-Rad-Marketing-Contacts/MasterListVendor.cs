@@ -8,14 +8,14 @@ namespace Bio_Rad_Marketing_Contacts
 {
     public class MasterListVendor
     {
-        public string companyName { get; set; }
-        public string vendorCode { get; set; }
+        public string CompanyName { get; set; }
+        public string VendorCode { get; set; }
 
 
         public MasterListVendor(string name, string code)
         {
-            companyName = name;
-            vendorCode = code;
+            CompanyName = name;
+            VendorCode = code;
         }
     }
 }

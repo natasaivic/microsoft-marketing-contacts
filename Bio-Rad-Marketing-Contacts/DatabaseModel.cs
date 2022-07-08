@@ -15,15 +15,15 @@ namespace Bio_Rad_Marketing_Contacts
                 AttachDbFilename={projectDir}\DatabaseFiles\Contacts.mdf;
                 Integrated Security=True";
 
-        public static void SaveCustomer(string name, string company, string phone, string address, string notes, DateTime createdOn)
+        public static void SaveCustomer(string name, string company, string phone, string address, string notes)
         {
             string queryString = @$"INSERT INTO dbo.Customers (Name, Company, PhoneNumber, Address, Note, CreatedOn) 
-                              VALUES (@name, @company, @phone, @address, @notes, '{createdOn}')";
+                              VALUES (@name, @company, @phone, @address, @notes, '{DateTime.Now}')";
             try
             {
                 SqlConnection connection = new SqlConnection(connString);
                 SqlCommand command = new SqlCommand(queryString, connection);
-                command.Connection.Open();
+                connection.Open();
 
                 SqlParameter nameParam = new SqlParameter("@name", SqlDbType.NVarChar, 50);
                 nameParam.Value = name;
@@ -41,10 +41,7 @@ namespace Bio_Rad_Marketing_Contacts
                 addressParam.Value = address;
                 command.Parameters.Add(addressParam);
 
-                SqlParameter noteParam = new SqlParameter("@notes", SqlDbType.NText)
-                {
-
-                };
+                SqlParameter noteParam = new SqlParameter("@notes", SqlDbType.NText);
                 noteParam.Value = notes;
                 command.Parameters.Add(noteParam);
 
@@ -52,7 +49,7 @@ namespace Bio_Rad_Marketing_Contacts
                 command.ExecuteNonQuery();
             } catch (SqlException ex) {
                 MessageBox.Show($"Error while saving Customer to database: {ex.Message}");
-            } 
+            }
         }
 
         public static List<Customer> GetCustomers()

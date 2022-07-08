@@ -6,11 +6,131 @@
         xmlns:local="clr-namespace:Bio_Rad_Marketing_Contacts"
         mc:Ignorable="d"
         Title="Bio-Rad Marketing Contacts" Height="650" Width="800">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="RoundedButtonStyleAdd" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0.8"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF6495ED"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFB0C4DE"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF4682B4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FocusVisual1">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background1" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border1" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background1" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border1" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background1" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border1" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background1" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border1" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground1" Color="#FF838383"/>
+        <Style x:Key="RoundedButtonStyleClear" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual1}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0.8"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#708090"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFB0C4DE"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#FF4682B4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border1}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background1}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border1}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground1}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/bio-rad-along-the-bay.jpg" Stretch="UniformToFill" />
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="75" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
+        <Image Source="/Images/bio-rad-logo.png" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="5,0,0,0"/>
+        <Label Content="Marketing Contacts" Grid.Row="0" VerticalAlignment="Center" FontSize="36" FontWeight="Bold" HorizontalAlignment="Left" Margin="155,0,0,0" />
+        <Label x:Name="Label_Time" Content="" Grid.Row="0"  HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Width="160" Height="50" FontWeight="Bold" HorizontalContentAlignment="Right" />
+
         <TabControl Grid.Row="1">
             <TabItem Header="Customers">
                 <Grid Background="#FFE5E5E5">
@@ -18,74 +138,90 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    
-                    <GroupBox Header="Add New Entry">
+
+                    <GroupBox Header="Add New Entry" Grid.Row="0">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
-                                <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Button x:Name="Button_Customer_Add" Grid.Row="0" Content="Add Customer" HorizontalAlignment="Left" Margin="403,0,0,0" VerticalAlignment="Top" Background="#FF417DC1" Height="30" Width="120" Click="Add_Customer_Click" Cursor="Hand"/>
-                            <Button x:Name="Button_Clear_Customer_Entry" Grid.Row="0" Content="Clear Entry" HorizontalAlignment="Left" Margin="403,60,0,0" VerticalAlignment="Top" Background="SlateGray"  Height="30" Width="120" Click="Button_Clear_Customer_Entry_Click" Cursor="Hand"/>
+                            <Button Style="{DynamicResource RoundedButtonStyleAdd}" x:Name="Button_Customer_Add" Grid.Row="0" Content="Add Customer" HorizontalAlignment="Left" Margin="403,25,0,0" VerticalAlignment="Top" Background="#FF417DC1" Height="30" Width="120" Click="Add_Customer_Click" Cursor="Hand" FontSize="14" BorderBrush="AliceBlue" Foreground="AliceBlue" FontFamily="Arial" />
+                            <Button Style="{DynamicResource RoundedButtonStyleClear}" x:Name="Button_Clear_Customer_Entry" Grid.Row="0" Content="Clear Entry" HorizontalAlignment="Left" Margin="403,75,0,0" VerticalAlignment="Top" Background="#FF696969"  Height="30" Width="120" Click="Button_Clear_Customer_Entry_Click" Cursor="Hand" FontSize="14" BorderBrush="#FFA9A9A9" Foreground="AliceBlue" FontFamily="Arial"/>
+                            <Label x:Name="Name" Grid.Row="0" Content="Name:" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" Width="100"/>
+                            <TextBox x:Name="TextBox_Customer_Name" Grid.Row="0" HorizontalAlignment="Left" Margin="180,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                            <Label x:Name="Company" Grid.Row="0" Content="Company:" HorizontalAlignment="Left" Margin="40,55,0,0" VerticalAlignment="Top" Width="100"/>
+                            <TextBox x:Name="TextBox_Customer_Company" Grid.Row="0" HorizontalAlignment="Left" Margin="180,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                            <Label x:Name="Phone_Number" Grid.Row="0" Content="Phone Number:" HorizontalAlignment="Left" Margin="40,85,0,0" VerticalAlignment="Top" Width="100"/>
+                            <TextBox x:Name="TextBox_Customer_PhoneNumber" Grid.Row="0" HorizontalAlignment="Left" Margin="180,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                            <Label x:Name="Address" Grid.Row="0" Content="Address:" HorizontalAlignment="Left" Margin="40,115,0,0" VerticalAlignment="Top" Width="100"/>
+                            <TextBox x:Name="TextBox_Customer_Address" Grid.Row="0" HorizontalAlignment="Left" Margin="180,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                            <Label x:Name="Notes" Content="Notes:" Grid.Row="0" HorizontalAlignment="Left" Margin="40,145,0,0" VerticalAlignment="Top" Width="100"/>
+                            <TextBox x:Name="TextBox_Customer_Notes" Grid.Row="0" HorizontalAlignment="Left" Margin="180,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="80"/>
                         </Grid>
                     </GroupBox>
-                    <Label x:Name="Name" Content="Name:" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" Width="100"/>
-                    <Label x:Name="Company" Content="Company:" HorizontalAlignment="Left" Margin="40,55,0,0" VerticalAlignment="Top" Width="100"/>
-                    <Label x:Name="Phone_Number" Content="Phone Number:" HorizontalAlignment="Left" Margin="40,85,0,0" VerticalAlignment="Top" Width="100"/>
-                    <Label x:Name="Address" Content="Address:" HorizontalAlignment="Left" Margin="40,115,0,0" VerticalAlignment="Top" Width="100"/>
-                    <TextBox x:Name="TextBox_Customer_Name" HorizontalAlignment="Left" Margin="180,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-                    <TextBox x:Name="TextBox_Customer_Company" HorizontalAlignment="Left" Margin="180,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-                    <TextBox x:Name="TextBox_Customer_PhoneNumber" HorizontalAlignment="Left" Margin="180,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-                    <TextBox x:Name="TextBox_Customer_Address" HorizontalAlignment="Left" Margin="180,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-                    <Label x:Name="Notes" Content="Notes:" HorizontalAlignment="Left" Margin="40,145,0,0" VerticalAlignment="Top" Width="100"/>
-                    <TextBox x:Name="TextBox_Customer_Notes" HorizontalAlignment="Left" Margin="180,145,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="100"/>
 
-                    <DataGrid x:Name="DataGrid_Customers" Grid.Row="1" VerticalScrollBarVisibility="Disabled"></DataGrid>
+                    <GroupBox Header="Customer Contacts" Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <DataGrid x:Name="DataGrid_Customers" Grid.Row="0" VerticalScrollBarVisibility="Disabled"></DataGrid>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
+            
             <TabItem Header="Vendors">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <GroupBox Header="Add New Entry">
+
+                    <GroupBox Header="Add New Entry" Grid.Row="0">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
-                                <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Button x:Name="Button_Vendor_Add" Content="Add Vendor" HorizontalAlignment="Left" Margin="403,0,0,0" VerticalAlignment="Top" Height="30" Width="120" Cursor="Hand" Background="#FF68C587" Click="Add_Vendor_Click"/>
-                            <Button x:Name="Button_Clear_Vendor_Entry" Grid.Row="0" Content="Clear Entry" HorizontalAlignment="Left" Margin="403,60,0,0" VerticalAlignment="Top" Background="SlateGray"  Height="30" Width="120" Click="Button_Clear_Vendor_Entry_Click" Cursor="Hand"/>
+                            <Button Style="{DynamicResource RoundedButtonStyleAdd}" x:Name="Button_Vendor_Add" Grid.Row="0" Content="Add Vendor" HorizontalAlignment="Left" Margin="403,25,0,0" VerticalAlignment="Top" Height="30" Width="120" Cursor="Hand" Background="#FF417DC1" Click="Add_Vendor_Click" FontSize="14" BorderBrush="AliceBlue" Foreground="AliceBlue" FontFamily="Arial"/>
+                            <Button Style="{DynamicResource RoundedButtonStyleClear}" x:Name="Button_Clear_Vendor_Entry" Grid.Row="0" Content="Clear Entry" HorizontalAlignment="Left" Margin="403,75,0,0" VerticalAlignment="Top" Background="#FF696969"  Height="30" Width="120" Click="Button_Clear_Vendor_Entry_Click" Cursor="Hand" FontSize="14" BorderBrush="#FFA9A9A9" Foreground="AliceBlue" FontFamily="Arial"/>
+                            <Label x:Name="VendorName" Grid.Row="0" Content="Name:" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" Width="100"/>
+                            <TextBox x:Name="TextBox_Vendor_Name" Grid.Row="0" HorizontalAlignment="Left" Margin="180,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                            <Label x:Name="VendorCompany" Grid.Row="0" Content="Company:" HorizontalAlignment="Left" Margin="40,55,0,0" VerticalAlignment="Top" Width="100"/>
+                            <TextBox x:Name="TextBox_Vendor_Company" Grid.Row="0" HorizontalAlignment="Left" Margin="180,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                            <Label x:Name="VendorPhoneNumber" Grid.Row="0" Content="Phone Number:" HorizontalAlignment="Left" Margin="40,85,0,0" VerticalAlignment="Top" Width="120"/>
+                            <TextBox x:Name="TextBox_Vendor_Phone_Number" Grid.Row="0" HorizontalAlignment="Left" Margin="180,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+                            <Label x:Name="VendorAddress" Grid.Row="0" Content="Address:" HorizontalAlignment="Left" Margin="40,115,0,0" VerticalAlignment="Top" Width="100"/>
+                            <TextBox x:Name="TextBox_Vendor_Address" Grid.Row="0" HorizontalAlignment="Left" Margin="180,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
+
                         </Grid>
                     </GroupBox>
-                    <Label x:Name="VendorName" Content="Name:" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top" Width="100"/>
-                    <TextBox x:Name="TextBox_Vendor_Name" HorizontalAlignment="Left" Margin="180,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-                    <Label x:Name="VendorCompany" Content="Company:" HorizontalAlignment="Left" Margin="40,55,0,0" VerticalAlignment="Top" Width="100"/>
-                    <TextBox x:Name="TextBox_Vendor_Company" HorizontalAlignment="Left" Margin="180,55,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-                    <Label x:Name="VendorAddress" Content="Address:" HorizontalAlignment="Left" Margin="40,85,0,0" VerticalAlignment="Top" Width="100"/>
-                    <TextBox x:Name="TextBox_Vendor_Address" HorizontalAlignment="Left" Margin="180,85,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
-                    <Label x:Name="VendorPhoneNumber" Content="Phone Number:" HorizontalAlignment="Left" Margin="40,115,0,0" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="TextBox_Vendor_Phone_Number" HorizontalAlignment="Left" Margin="180,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150"/>
 
-                    <DataGrid x:Name="DataGrid_Vendors" Grid.Row="1"></DataGrid>
-
+                    <GroupBox Header="Vendor Contacts" Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <DataGrid x:Name="DataGrid_Vendors" Grid.Row="0"></DataGrid>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
+            
             <TabItem Header="Master List">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="DataGrid_MasterList"></DataGrid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Vendor Master List" Grid.Row="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <DataGrid x:Name="DataGrid_MasterList" Grid.Row="0"></DataGrid>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Image Source="/bio-rad-logo.png" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="5,0,0,0"/>
-        <Label VerticalAlignment="Center" Content="Marketing Contacts" FontSize="36" FontWeight="Bold" HorizontalAlignment="Left" Margin="155,0,0,0" />
-        <Label x:Name="Label_Time" Content="" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Width="160" Height="50" FontWeight="Bold" HorizontalContentAlignment="Right" />
-    </Grid>
+        </Grid>
 </Window>

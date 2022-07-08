@@ -24,7 +24,7 @@ namespace Bio_Rad_Marketing_Contacts
 
         private void InitializeClock()
         {
-            Label_Time.Content = DateTime.Now.ToString("HH:mm:ss");
+            Clock_Tick(null, null);
 
             DispatcherTimer clock = new DispatcherTimer();
             clock.Interval = TimeSpan.FromSeconds(1);
@@ -32,7 +32,7 @@ namespace Bio_Rad_Marketing_Contacts
             clock.Start();
         }
 
-        void Clock_Tick(object? sender, EventArgs e)
+        void Clock_Tick(object? sender, EventArgs? e)
         {
             Label_Time.Content = DateTime.Now.ToString("HH:mm:ss");
         }
@@ -70,7 +70,7 @@ namespace Bio_Rad_Marketing_Contacts
             }
 
             // Save data in DB
-            DatabaseModel.SaveCustomer(name, company, phone, address, notes, DateTime.Now);
+            DatabaseModel.SaveCustomer(name, company, phone, address, notes);
 
             // reload data grid
             RefreshCustomerDataGrid();
