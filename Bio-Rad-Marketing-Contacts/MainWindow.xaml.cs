@@ -56,7 +56,11 @@ namespace Bio_Rad_Marketing_Contacts
                 MessageBox.Show("Company cannot be empty");
                 return;
             }
-
+            if (String.IsNullOrEmpty(phone))
+            {
+                MessageBox.Show("Phone number cannot be empty.");
+                return;
+            }
             if (!isValidPhoneNumber(phone))
             {
                 MessageBox.Show("Phone number is not valid");
@@ -169,19 +173,9 @@ namespace Bio_Rad_Marketing_Contacts
 
         private bool isValidPhoneNumber(string phone)
         {
-            if (String.IsNullOrEmpty(phone))
-            {
-                return false;
-            }
-
             var regex = @"^[0-9]{3}(-| )?[0-9]{3}(-| )?[0-9]{4}$";
             var result = Regex.Match(phone, regex);
-            if (!result.Success)
-            {
-                return false;
-            }
-
-            return true;
+            return result.Success;      
         }
 
         private void Button_Clear_Customer_Entry_Click(object sender, RoutedEventArgs e)

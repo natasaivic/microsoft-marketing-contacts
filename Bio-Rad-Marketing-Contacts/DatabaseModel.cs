@@ -102,7 +102,7 @@ namespace Bio_Rad_Marketing_Contacts
             {
                 SqlConnection connection = new SqlConnection(connString);
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
-                command.Connection.Open();
+                connection.Open();
 
                 SqlParameter nameParam = new SqlParameter("@name", SqlDbType.NVarChar, 50);
                 nameParam.Value = name;
