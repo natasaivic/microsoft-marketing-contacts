@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <None Remove="bio-rad-logo.png" />
-    <None Remove="Images\bio-rad-along-the-bay.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\bio-rad-along-the-bay.jpg" />
     <Resource Include="Images\bio-rad-logo.png" />
   </ItemGroup>
 

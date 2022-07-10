@@ -7,9 +7,6 @@
         mc:Ignorable="d"
         Title="Bio-Rad Marketing Contacts" Height="650" Width="800">
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Images/bio-rad-along-the-bay.jpg" Stretch="UniformToFill" />
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="75" />
             <RowDefinition Height="*" />
