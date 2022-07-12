@@ -41,7 +41,7 @@ namespace Bio_Rad_Marketing_Contacts
                 addressParam.Value = address;
                 command.Parameters.Add(addressParam);
 
-                SqlParameter noteParam = new SqlParameter("@notes", SqlDbType.NText);
+                SqlParameter noteParam = new SqlParameter("@notes", SqlDbType.NText, 10000);
                 noteParam.Value = notes;
                 command.Parameters.Add(noteParam);
 
