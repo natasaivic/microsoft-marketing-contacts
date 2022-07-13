@@ -47,8 +47,15 @@ namespace Bio_Rad_Marketing_Contacts
 
                 command.Prepare();
                 command.ExecuteNonQuery();
-            } catch (SqlException ex) {
+            }
+            catch (SqlException ex)
+            {
                 MessageBox.Show($"Error while saving Customer to database: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fatal error, terminating application. {ex.Message}");
+                Application.Current.Shutdown();
             }
         }
 
@@ -87,8 +94,14 @@ namespace Bio_Rad_Marketing_Contacts
                     result.Insert(0, customer);
                 }
             }
-            catch (SqlException ex) {
+            catch (SqlException ex)
+            {
                 MessageBox.Show($"Error while loading Customer list from database: {ex.Message}");
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show($"Fatal error, terminating application. {ex.Message}");
+                Application.Current.Shutdown();
             }
 
             return result;
@@ -122,8 +135,14 @@ namespace Bio_Rad_Marketing_Contacts
 
                 command.Prepare();
                 command.ExecuteNonQuery();
-            } catch (SqlException ex) {
+            } 
+            catch (SqlException ex) {
                 MessageBox.Show($"Error while saving Vendor to database: {ex.Message}");
+            } 
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fatal error, terminating application. {ex.Message}");
+                Application.Current.Shutdown();
             }
         }
 
@@ -159,9 +178,10 @@ namespace Bio_Rad_Marketing_Contacts
             catch (SqlException ex) {
                 MessageBox.Show($"SQL error while loading vendor list {ex.Message}");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error while loading vendor list from database, the list will be empty");
+                MessageBox.Show($"Fatal error, terminating application. {ex.Message}");
+                Application.Current.Shutdown();
             }
 
             return result;
@@ -194,9 +214,15 @@ namespace Bio_Rad_Marketing_Contacts
             catch (SqlException ex)
             {
                 MessageBox.Show($"SQL error while loading vendor list {ex.Message}");
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fatal error, termination application. {ex.Message}");
+                Application.Current.Shutdown();
             }
 
-            return null;    
+            return null;  
         }
 
         public static void AddVendorCompanyToMasterList(string company, string vendorCode) {
@@ -205,7 +231,7 @@ namespace Bio_Rad_Marketing_Contacts
                 VALUES (@company, @vendorCode)";
             try
             {
-                SqlConnection connection = new SqlConnection(connString);           
+                SqlConnection connection = new SqlConnection(connString);
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
                 connection.Open();
 
@@ -223,7 +249,12 @@ namespace Bio_Rad_Marketing_Contacts
             catch (SqlException ex)
             {
                 MessageBox.Show($"Database error while adding new Vendor. Invalid SQL. {ex.Message}");
-                System.Windows.Application.Current.Shutdown();
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fatal error, terminating application. {ex.Message}");
+                Application.Current.Shutdown();
             }
         }
 
@@ -254,8 +285,14 @@ namespace Bio_Rad_Marketing_Contacts
             catch (SqlException ex)
             {
                 MessageBox.Show($"Database error while adding new Vendor. Invalid SQL. {ex.Message}");
-                System.Windows.Application.Current.Shutdown();
+                Application.Current.Shutdown();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fatal error, terminating application. {ex.Message}");
+                Application.Current.Shutdown();
+            }
+
             return result;
         }
 
@@ -280,7 +317,12 @@ namespace Bio_Rad_Marketing_Contacts
             }
             catch (SqlException ex) {
                 MessageBox.Show($"Database error while adding new Vendor. Invalid SQL. {ex.Message}");
-                System.Windows.Application.Current.Shutdown();
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fatal error, terminating application. {ex.Message}");
+                Application.Current.Shutdown();
             }
             return false;
         }
