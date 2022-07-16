@@ -106,6 +106,21 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
+            <TabItem Header="All Contacts">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="All Contacts List" Grid.Row="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <DataGrid x:Name="DataGrid_All_Contacts" Grid.Row="0"></DataGrid>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
         </TabControl>
         </Grid>
 </Window>

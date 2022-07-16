@@ -296,6 +296,51 @@ namespace Microsoft_Marketing_Contacts
             return result;
         }
 
+        public static List<Contact> GetAllContacts()
+        {
+            List<Contact> result = new List<Contact>();
+
+            string queryString = @"
+                (
+				    SELECT Name, Address, PhoneNumber, Company
+  				    FROM Customers
+				)
+				UNION (
+  				    SELECT Name, Address, PhoneNumber, Company
+  				    FROM Vendors
+				)";
+
+            try
+            {
+                SqlConnection connection = new SqlConnection(connString);
+                SqlCommand command = new SqlCommand(queryString, connection);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    var name = reader.GetString(0);
+                    var company = reader.GetString(1);
+                    var phoneNumber = reader.GetString(2);
+                    var address = reader.GetString(3);
+
+                    var contact = new Contact(name, company, phoneNumber, address);
+                    result.Insert(0, contact);
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Error while loading Contact list from database: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fatal error, terminating application. {ex.Message}");
+                Application.Current.Shutdown();
+            }
+
+            return result;
+        }
+
         public static bool CheckIfVenorCodeExists(string code)
         {
             string sqlString = @"

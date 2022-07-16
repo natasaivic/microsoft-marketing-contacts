@@ -20,6 +20,7 @@ namespace Microsoft_Marketing_Contacts
             DataGrid_Customers.ItemsSource = DatabaseModel.GetCustomers();
             DataGrid_Vendors.ItemsSource = DatabaseModel.GetVendors();
             DataGrid_MasterList.ItemsSource = DatabaseModel.GetMasterListVendors();
+            DataGrid_All_Contacts.ItemsSource = DatabaseModel.GetAllContacts();
         }
 
         private void InitializeClock()
