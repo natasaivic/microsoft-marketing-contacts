@@ -3,17 +3,22 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <RootNamespace>Bio_Rad_Marketing_Contacts</RootNamespace>
+    <RootNamespace>Microsoft_Marketing_Contacts</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="bio-rad-logo.png" />
+    <None Remove="microsoft_logo.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="microsoft_logo.jpg" />
   </ItemGroup>
 
   <ItemGroup>
